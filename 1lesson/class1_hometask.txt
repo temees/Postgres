@@ -1,0 +1,14 @@
+В базе из пункта 2 создать таблицу: не менее трёх столбцов различных типов. SQL-запрос на создание таблицы добавить в текстовый файл class1_hometask.txt.
+mydb=# CREATE TABLE product (name varchar(80), data date, price money);
+CREATE TABLE
+
+В таблицу из пункта 3 вставить не менее трёх строк. SQL-запрос на вставку добавить в текстовый файл class1_hometask.txt.
+mydb=# insert into product values ('bread', '2021-10-08', 10.99);
+
+Используя мета-команды psql, вывести список всех сущностей в базе данных из пункта 2. Полученный список сущностей добавить в текстовый файл class1_hometask.txt.
+\d
+Schema | public
+Name   | product
+Type   | table
+Owner  | postgres
+
