@@ -1,0 +1,61 @@
+        
+myshop=> \d+
+                                   List of relations
+ Schema |      Name       |   Type   | Owner  | Persistence |    Size    | Description 
+--------+-----------------+----------+--------+-------------+------------+-------------
+ public | cart            | table    | myuser | permanent   | 8192 bytes | 
+ public | category        | table    | myuser | permanent   | 16 kB      | 
+ public | category_id_seq | sequence | myuser | permanent   | 8192 bytes | 
+ public | product         | table    | myuser | permanent   | 16 kB      | 
+ public | product_id_seq  | sequence | myuser | permanent   | 8192 bytes | 
+ public | users           | table    | myuser | permanent   | 8192 bytes | 
+ public | users_id_seq    | sequence | myuser | permanent   | 8192 bytes | 
+(7 rows)
+
+myshop=> select count(1) as cnt from product
+myshop-> ;
+ cnt 
+-----
+   3
+(1 row)
+
+myshop=> select count(1) as cnt from users;
+ cnt 
+-----
+   4
+(1 row)
+
+myshop=> select count(1) as cnt from category;
+ cnt 
+-----
+   3
+(1 row)
+
+myshop=> select count(1) as cnt from cart;
+ cnt 
+-----
+   4
+(1 row)
+
+myshop=> \d+
+                                   List of relations
+ Schema |      Name       |   Type   | Owner  | Persistence |    Size    | Description 
+--------+-----------------+----------+--------+-------------+------------+-------------
+ public | cart            | table    | myuser | permanent   | 8192 bytes | 
+ public | category        | table    | myuser | permanent   | 16 kB      | 
+ public | category_id_seq | sequence | myuser | permanent   | 8192 bytes | 
+ public | product         | table    | myuser | permanent   | 16 kB      | 
+ public | product_id_seq  | sequence | myuser | permanent   | 8192 bytes | 
+ public | users           | table    | myuser | permanent   | 8192 bytes | 
+ public | users_id_seq    | sequence | myuser | permanent   | 8192 bytes | 
+(7 rows)
+
+postgres=> \d+
+                             List of relations
+ Schema |  Name   | Type  |  Owner   | Persistence |  Size   | Description 
+--------+---------+-------+----------+-------------+---------+-------------
+ public | product | table | postgres | permanent   | 0 bytes | 
+(1 row)
+
+
+
