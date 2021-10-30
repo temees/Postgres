@@ -12,3 +12,4 @@ Name   | product
 Type   | table
 Owner  | postgres
 
+дз
