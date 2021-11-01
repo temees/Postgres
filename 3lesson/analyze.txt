@@ -1,0 +1,46 @@
+explain analyze select sum(price) from product join cart on product_id = product.id where cart.users_id = 2;
+
+Aggregate  (cost=5.95..5.96 rows=1 width=8) (actual time=2.461..2.561 rows=1 loops=1)
+  ->  Hash Join  (cost=2.29..5.94 rows=3 width=4) (actual time=0.164..2.477 rows=3 loops=1)
+        Hash Cond: (product.id = cart.product_id)
+        ->  Seq Scan on product  (cost=0.00..3.00 rows=100 width=12) (actual time=0.021..1.228 rows=100 loops=1)
+        ->  Hash  (cost=2.25..2.25 rows=3 width=4) (actual time=0.107..0.136 rows=3 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 9kB
+              ->  Seq Scan on cart  (cost=0.00..2.25 rows=3 width=4) (actual time=0.017..0.063 rows=3 loops=1)
+                    Filter: (users_id = 2)
+                    Rows Removed by Filter: 97
+Planning Time: 0.159 ms
+Execution Time: 2.718 ms
+
+
+Nested Loop  (cost=4.57..34.87 rows=3 width=97) (actual time=0.223..0.441 rows=3 loops=1)
+  ->  Bitmap Heap Scan on cart  (cost=4.30..9.97 rows=3 width=12) (actual time=0.055..0.118 rows=3 loops=1)
+        Recheck Cond: (users_id = 2)
+        Heap Blocks: exact=1
+        ->  Bitmap Index Scan on cart_users_id_idx  (cost=0.00..4.30 rows=3 width=0) (actual time=0.014..0.025 rows=3 loops=1)
+              Index Cond: (users_id = 2)
+  ->  Index Scan using product_id_pkey on product  (cost=0.28..8.29 rows=1 width=85) (actual time=0.020..0.024 rows=1 loops=3)
+        Index Cond: (id = cart.product_id)
+Planning Time: 27.562 ms
+Execution Time: 0.565 ms
+
+
+create index concurrently cart_users_id_idx on cart (users_id);
+create index concurrently cart_product_id_idx on cart (product_id);
+
+
+explain analyze select * from users where users_name = 'Kate';
+Seq Scan on users  (cost=0.00..2.25 rows=1 width=18) (actual time=0.028..0.068 rows=1 loops=1)
+  Filter: ((users_name)::text = 'Kate'::text)
+  Rows Removed by Filter: 99
+Planning Time: 2.396 ms
+Execution Time: 0.152 ms
+
+Index Scan using users_users_name_index on users  (cost=0.28..8.29 rows=1 width=18) (actual time=0.030..0.052 rows=1 loops=1)
+  Index Cond: ((users_name)::text = 'Kate'::text)
+Planning Time: 0.180 ms
+Execution Time: 0.117 ms
+
+
+
+
