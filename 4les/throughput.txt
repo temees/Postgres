@@ -1,0 +1,49 @@
+root@dc54bc29c931:/# lscpu
+Architecture:        x86_64
+CPU op-mode(s):      32-bit, 64-bit
+Byte Order:          Little Endian
+Address sizes:       39 bits physical, 48 bits virtual
+CPU(s):              4
+On-line CPU(s) list: 0-3
+Thread(s) per core:  1
+Core(s) per socket:  1
+Socket(s):           4
+Vendor ID:           GenuineIntel
+CPU family:          6
+Model:               94
+Model name:          Intel(R) Core(TM) i7-6700HQ CPU @ 2.60GHz
+Stepping:            3
+CPU MHz:             2600.000
+BogoMIPS:            5200.00
+L1d cache:           32K
+L1i cache:           32K
+L2 cache:            256K
+L3 cache:            6144K
+Flags:               fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht pbe syscall nx pdpe1gb lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid pni pclmulqdq dtes64 ds_cpl ssse3 sdbg fma cx16 xtpr pcid sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch fsgsbase bmi1 hle avx2 bmi2 erms rtm xsaveopt arat
+
+root@dc54bc29c931:/# lsmem
+RANGE                                 SIZE  STATE REMOVABLE BLOCK
+0x0000000000000000-0x000000007fffffff   2G online       yes  0-15
+
+Memory block size:       128M
+Total online memory:       2G
+Total offline memory:      0B
+
+root@dc54bc29c931:/# lsblk
+NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+vda    254:0    0 59.6G  0 disk 
+└─vda1 254:1    0 59.6G  0 part /etc/hosts
+
+felixsmith@MacBook-Pro-Felix 4les % go run attac.go                                
+start attack
+duration: 11.426753214s
+threads: 1000
+queries: 8114
+QPS: 737
+felixsmith@MacBook-Pro-Felix 4les % go run attac.go
+start attack
+duration: 10.398869256s
+threads: 1000
+queries: 23967
+QPS: 2396
+
